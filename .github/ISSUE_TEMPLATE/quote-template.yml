@@ -12,6 +12,8 @@ body:
     attributes:
       label: Category
       description: What category does your quote belong to?
+      validations:
+        required: true
       options:
         - Inspirational
         - Sarcastic
@@ -21,8 +23,6 @@ body:
         - Scary
         - Family
         - Workplace
-      validations:
-        required: true
   - type: input
     id: author
     attributes:
