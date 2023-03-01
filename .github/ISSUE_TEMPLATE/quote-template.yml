@@ -9,11 +9,11 @@ body:
         Thanks for taking the time to submit a new quote!
   - type: dropdown
     id: category
+    validations:
+      required: true
     attributes:
       label: Category
       description: What category does your quote belong to?
-      validations:
-        required: true
       options:
         - Inspirational
         - Sarcastic
