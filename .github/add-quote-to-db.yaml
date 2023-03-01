@@ -1,0 +1,15 @@
+name: "Issue Labeler"
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+    - run: node lib/index.js
