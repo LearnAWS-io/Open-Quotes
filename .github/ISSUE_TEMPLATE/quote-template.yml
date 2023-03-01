@@ -1,0 +1,53 @@
+name: Submit a new quote
+description: Add a new quote
+title: "[Quote]: "
+labels: ["new-quote"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to submit a new quote!
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does your quote belong to?
+      options:
+        - Inspirational
+        - Sarcastic
+        - Facts
+        - Technology
+        - Life
+        - Scary
+        - Family
+        - Workplace
+      validations:
+        required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: "Who said this quote?"
+      placeholder: "Albert Einstein"
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: Enter the quote
+      description: Also tell us, what did you expect to happen?
+      placeholder: Everybody is a genius.
+      But if you judge a fish by its ability to climb a tree,
+      it will live its whole life believing that it is stupid.
+    validations:
+      required: true
+    validations:
+      required: true
+  - type: checkboxes
+    id: quote-check
+    attributes:
+      label: Quote duplicacy confirmation
+      description: Search for existing quotes before submitting a new quote
+      options:
+        - label: I confirm that this quote isn't a duplicate
+          required: true
