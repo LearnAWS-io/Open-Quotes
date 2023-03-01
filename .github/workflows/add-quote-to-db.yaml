@@ -1,4 +1,4 @@
-name: "Issue Labeler"
+name: "Add quote to DB"
 on:
   issues:
     types: [opened, edited]
