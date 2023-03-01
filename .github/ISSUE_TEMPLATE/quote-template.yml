@@ -36,12 +36,11 @@ body:
     attributes:
       label: Enter the quote
       description: Also tell us, what did you expect to happen?
+      render: text
       placeholder: |
         Everybody is a genius.
         But if you judge a fish by its ability to climb a tree,
         it will live its whole life believing that it is stupid.
-    validations:
-      required: true
     validations:
       required: true
   - type: checkboxes
