@@ -1,5 +1,5 @@
 ---
-name: Submit a new quote
+name: Submit a new quote here
 about: Sumbit your thought-provoking quote
 title: ''
 labels: new-quote
