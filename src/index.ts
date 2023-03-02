@@ -41,6 +41,12 @@ const run = async () => {
     }
     const quote = parseMd(issue.body);
     await addLabels(client, issue.number, ["accepted"]);
+
+    await client.issues.removeLabel({
+      ...issueParams,
+      name: "new-quote",
+    });
+
     await client.issues.update({
       ...issueParams,
       state: "closed",
