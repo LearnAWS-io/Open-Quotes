@@ -1,5 +1,5 @@
-name: 'Create or Update Comment'
-description: 'Create or update an issue or pull request comment'
+name: 'Issue to Quote'
+description: 'Push quotes from issues to DynamoDB'
 inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
