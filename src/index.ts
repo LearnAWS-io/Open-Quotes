@@ -14,7 +14,7 @@ const run = async () => {
     return typeof label === "string" ? label : label.name;
   });
 
-  const labelsSet = new Set(...labelNames);
+  const labelsSet = new Set(labelNames);
 
   console.log(labelsSet);
 
