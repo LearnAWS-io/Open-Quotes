@@ -14,6 +14,8 @@ const run = async () => {
     return typeof label === "string" ? label : label.name;
   });
 
+  console.log(labelNames);
+  console.log(issue.labels);
   const labelsSet = new Set(...labelNames);
 
   // lookup if issue has 'new-quote' label
