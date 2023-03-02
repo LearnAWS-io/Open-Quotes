@@ -53,7 +53,8 @@ export const parseMd = (md: string, title: string) => {
 
   //@ts-ignore
   mdObj["Category"] = mdObj.Category?.split(", ");
-  mdObj["Title"] = title.split("[Quote]: ")[0];
+  // Remove quote from title
+  mdObj["Title"] = title.replace("[Quote]:", "").trim();
 
   console.log(mdObj);
 
