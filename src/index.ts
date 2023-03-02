@@ -14,12 +14,12 @@ const run = async () => {
     return typeof label === "string" ? label : label.name;
   });
 
-  console.log(labelNames);
-  console.log(issue.labels);
   const labelsSet = new Set(...labelNames);
 
+  console.log(labelsSet);
+
   // lookup if issue has 'new-quote' label
-  if (!labelsSet.has("new-quote")) {
+  if (labelsSet.has("new-quote") === false) {
     console.log("Nothing to be done");
     return;
   }
