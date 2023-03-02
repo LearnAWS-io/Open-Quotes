@@ -96,7 +96,7 @@ const parse = async () => {
 const run = async () => {
   const { issue } = context.payload;
   // A client to load data from GitHub
-  const token = context.github.token;
+  const token = process.env.GITHUB_TOKEN;
   const { owner, repo } = context.repo;
   const { rest: client } = getOctokit(token);
 
