@@ -40,8 +40,13 @@ const run = async () => {
     if (!issue.body) {
       throw Error("Empty body supplied.");
     }
+
+    if (!issue.user) {
+      throw Error("Unkown user");
+    }
+
     const quote = parseMd(issue.body, issue.title);
-    await addQuote(quote);
+    await addQuote(quote, issue.user.login);
     await addLabels(client, issue.number, ["accepted"]);
 
     await client.issues.removeLabel({

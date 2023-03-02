@@ -11,7 +11,7 @@ const ksuid = new KSUID32();
 
 const TableName = process.env.TableName;
 
-export const addQuote = async (quote: Quote) => {
+export const addQuote = async (quote: Quote, ghUsername: string) => {
   const quoteId = ksuid.next();
   const quotePK = `QUOTE#${quoteId}`;
 
@@ -42,7 +42,14 @@ export const addQuote = async (quote: Quote) => {
       {
         Put: {
           TableName,
-          Item: marshall({ ...quoteItem, ...quote }),
+          Item: marshall({
+            ...quoteItem,
+            author: quote.Author,
+            title: quote.Title,
+            quote: quote.Quote,
+            createdAt: new Date().toISOString(),
+            postedBy: ghUsername,
+          }),
         },
       },
       ...categoryMappings,
