@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import { getBorderCharacters, table } from "table";
 import { MdSchema } from "./schema";
 
-export const parseMd = async (md: string) => {
+export const parseMd = (md: string) => {
   const { children: nodes } = unified()
     .use(remarkParse)
     .use(remarkGfm)
