@@ -12,4 +12,4 @@ jobs:
       with:
         node-version: 18
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-    - run: node lib/index.js
+    - run: node lib/index.mjs
