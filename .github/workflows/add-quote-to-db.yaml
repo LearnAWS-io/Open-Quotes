@@ -11,4 +11,4 @@ jobs:
     - uses: ./
       with:
         node-version: 18
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        token: "${{ secrets.GITHUB_TOKEN }}"
