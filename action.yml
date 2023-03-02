@@ -1,8 +1,9 @@
 name: 'Create or Update Comment'
 description: 'Create or update an issue or pull request comment'
 inputs:
-  token:
-    description: 'GITHUB_TOKEN or a repo scoped PAT.'
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
     default: ${{ github.token }}
 runs:
   using: 'node16'
