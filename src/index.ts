@@ -4,13 +4,9 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import { z } from "zod";
 import { getBorderCharacters, table } from "table";
+import { getInput } from "@actions/core";
+import { addLabels } from "./utils";
 
-const run = async () => {
-  const { issue } = context.payload;
-  console.log(issue.body);
-};
-
-// run();
 const md = `
 ### Category
 
@@ -24,7 +20,6 @@ Shivam
 
 \`\`\`text
 Everyone should contribute to open source
-Everyone should contribute to open source Everyone should contribute to open source Everyone should contribute to open source
 \`\`\`
 
 
@@ -78,15 +73,34 @@ const parse = async () => {
 
   const quoteObj = MdSchema.parse(mdObj);
   const tableData = [Object.keys(quoteObj), Object.values(quoteObj)];
+  console.log(quoteObj);
+
   console.log(
     table(tableData, {
       border: getBorderCharacters("norc"),
+      columnDefault: {
+        wrapWord: true,
+      },
       columns: {
         2: { width: 20 },
         3: { width: 15, alignment: "center" },
       },
     })
   );
+
+  return quoteObj;
 };
 
-parse();
+// parse();
+
+const run = async () => {
+  const { issue } = context.payload;
+  // A client to load data from GitHub
+  const token = getInput("repo-token", { required: true });
+  const { rest: client } = getOctokit(token);
+
+  const res = addLabels(client, issue.number, ["invalid"]);
+  console.log(res);
+};
+
+run();
