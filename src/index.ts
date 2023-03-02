@@ -36,6 +36,9 @@ const run = async () => {
     issue_number: issue.number,
   };
   try {
+    if (!issue.body) {
+      throw Error("Empty body supplied.");
+    }
     const quote = parseMd(issue.body);
     await addLabels(client, issue.number, ["accepted"]);
     await client.issues.update({
@@ -43,11 +46,13 @@ const run = async () => {
       state: "closed",
     });
   } catch (err) {
-    await addLabels(client, issue.number, ["invalid"]);
-    await client.issues.createComment({
-      ...issueParams,
-      body: `Failed to parse the quote: ${err.message}`,
-    });
+    if (err instanceof Error) {
+      await addLabels(client, issue.number, ["invalid"]);
+      await client.issues.createComment({
+        ...issueParams,
+        body: `Failed to parse the quote: ${err?.message}`,
+      });
+    }
   }
 };
 
