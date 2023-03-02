@@ -43,10 +43,10 @@ export const parseMd = (md: string) => {
     }
   }
 
+  console.log(mdObj);
+
   const quoteObj = MdSchema.parse(mdObj);
   const tableData = [Object.keys(quoteObj), Object.values(quoteObj)];
-
-  // console.log(quoteObj);
 
   console.log(
     table(tableData, {
