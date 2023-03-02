@@ -12,7 +12,7 @@ const run = async () => {
   const { rest: client } = getOctokit(token);
 
   try {
-    const quote = parseMd(issue.body);
+    const quote = await parseMd(issue.body);
     await addLabels(client, issue.number, ["accepted"]);
   } catch (err) {
     await addLabels(client, issue.number, ["invalid"]);
