@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
+    - run: node lib/index.mjs
       with:
         node-version: 18
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-    - run: node lib/index.mjs

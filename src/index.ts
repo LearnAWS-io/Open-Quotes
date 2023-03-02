@@ -97,16 +97,15 @@ const run = async () => {
   const { issue } = context.payload;
   // A client to load data from GitHub
   const token = getInput("repo-token", { required: true });
-  const repo = getInput("repository", { required: true });
+  const { owner, repo } = context.repo;
   const { rest: client } = getOctokit(token);
 
   const res = await addLabels(client, issue.number, ["invalid"]);
 
   console.log(res);
-  const [owner, repoName] = repo.split("/");
   await client.issues.createComment({
     owner,
-    repo: repoName,
+    repo,
     issue_number: issue.number,
     body: "Hey its just a comment",
   });

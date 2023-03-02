@@ -11,7 +11,7 @@ build({
   logLevel: "info",
   entryPoints: ["./src/index.ts"],
   outdir: join(process.cwd(), "./lib/"),
-  minify: true,
+  minify: false,
   format: "esm",
   target: "esnext",
   platform: "node",
