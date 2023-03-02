@@ -4,20 +4,27 @@ import remarkGfm from "remark-gfm";
 import { getBorderCharacters, table } from "table";
 import { MdSchema } from "./schema";
 
-export const parseMd = (md: string) => {
+type MdObj = {
+  Title: string;
+  Category: string;
+  Author: string;
+  Quote: string;
+  "Quote non-duplicity confirmation": boolean;
+};
+export const parseMd = (md: string, title: string) => {
   const { children: nodes } = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .parse(md);
 
-  const mdObj = {};
+  const mdObj: Partial<MdObj> = {};
 
   for (let idx = 0; idx < nodes.length - 1; idx = idx + 2) {
     const node = nodes[idx];
     const nodeNext = nodes[idx + 1];
 
     // case for next value
-    let keyVal: string | boolean;
+    let keyVal: string | boolean | null = null;
 
     switch (nodeNext.type) {
       case "paragraph":
@@ -30,7 +37,7 @@ export const parseMd = (md: string) => {
         keyVal = nodeNext.value;
         break;
       case "list":
-        keyVal = nodeNext.children[0].checked;
+        keyVal = nodeNext.children[0].checked ?? false;
         break;
     }
 
@@ -38,10 +45,15 @@ export const parseMd = (md: string) => {
     if (node.type === "heading") {
       const child1 = node.children[0];
       if (child1.type === "text") {
+        //@ts-ignore
         mdObj[child1.value] = keyVal;
       }
     }
   }
+
+  //@ts-ignore
+  mdObj["Category"] = mdObj.Category?.split(", ");
+  mdObj["Title"] = title;
 
   console.log(mdObj);
 

@@ -3,6 +3,7 @@ import { getInput } from "@actions/core";
 import { Endpoints } from "@octokit/types";
 import { addLabels } from "./utils";
 import { parseMd } from "./parser";
+import { addQuote } from "./db";
 
 type IssueResponse =
   Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}"]["response"]["data"];
@@ -39,7 +40,8 @@ const run = async () => {
     if (!issue.body) {
       throw Error("Empty body supplied.");
     }
-    const quote = parseMd(issue.body);
+    const quote = parseMd(issue.body, issue.title);
+    await addQuote(quote);
     await addLabels(client, issue.number, ["accepted"]);
 
     await client.issues.removeLabel({
