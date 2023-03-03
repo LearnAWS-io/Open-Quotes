@@ -12,6 +12,10 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
+    "@aws-sdk/client-dynamodb": "^3.282.0",
+    "@aws-sdk/util-dynamodb": "^3.282.0",
+    "@octokit/types": "^9.0.0",
+    "@thi.ng/ksuid": "^3.1.4",
     "rehype-stringify": "^9.0.3",
     "remark-gfm": "^3.0.1",
     "remark-parse": "^10.0.1",
