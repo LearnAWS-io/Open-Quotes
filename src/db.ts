@@ -46,7 +46,7 @@ export const addQuote = async (quote: Quote, ghUsername: string) => {
             ...quoteItem,
             author: quote.Author,
             title: quote.Title,
-            quote: quote.Quote,
+            quote: quote.Quote.trim(),
             categories: quote.Category,
             createdAt: new Date().toISOString(),
             postedBy: ghUsername,
