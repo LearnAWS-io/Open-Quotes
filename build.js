@@ -11,9 +11,10 @@ build({
   logLevel: "info",
   entryPoints: ["./src/index.ts"],
   outdir: join(process.cwd(), "./lib/"),
-  minify: false,
+  minify: true,
+  // sourcemap: "linked",
   format: "esm",
-  target: "esnext",
+  target: "es2021",
   platform: "node",
   banner: {
     js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);",
