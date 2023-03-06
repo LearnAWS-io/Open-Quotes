@@ -45,8 +45,9 @@ const run = async () => {
       throw Error("Unkown user");
     }
 
+    const username = issue.user.login;
     const quote = parseMd(issue.body, issue.title);
-    const dbRes = addQuote(quote, issue.user.login);
+    const dbRes = addQuote(quote, username);
     await dbRes.transact;
 
     const acceptedLabel = addLabels(client, issue.number, ["accepted"]);
@@ -58,7 +59,7 @@ const run = async () => {
 
     const successComment = client.issues.createComment({
       ...issueParams,
-      body: `Thank you for your quote @${issue.user.id}.
+      body: `Thank you for your quote @${username}.
 Your quote has been added to the quotes DB.
 
 You can view the quote by opening: https://quotes.learnaws.io/${dbRes.quoteId}`,
