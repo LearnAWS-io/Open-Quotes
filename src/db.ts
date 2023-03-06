@@ -11,7 +11,7 @@ const ksuid = new KSUID32();
 
 const TableName = process.env.TableName;
 
-export const addQuote = async (quote: Quote, ghUsername: string) => {
+export const addQuote = (quote: Quote, ghUsername: string) => {
   const quoteId = ksuid.next();
   const quotePK = `QUOTE#${quoteId}`;
 
@@ -57,5 +57,5 @@ export const addQuote = async (quote: Quote, ghUsername: string) => {
     ],
   });
 
-  return dbClient.send(transactWriteCmd);
+  return { transact: dbClient.send(transactWriteCmd), quoteId };
 };

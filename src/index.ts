@@ -46,18 +46,35 @@ const run = async () => {
     }
 
     const quote = parseMd(issue.body, issue.title);
-    await addQuote(quote, issue.user.login);
-    await addLabels(client, issue.number, ["accepted"]);
+    const dbRes = addQuote(quote, issue.user.login);
+    await dbRes.transact;
 
-    await client.issues.removeLabel({
+    const acceptedLabel = addLabels(client, issue.number, ["accepted"]);
+
+    const removeNewQuoteLabel = client.issues.removeLabel({
       ...issueParams,
       name: "new-quote",
     });
 
-    await client.issues.update({
+    const successComment = client.issues.createComment({
+      ...issueParams,
+      body: `Thank you for your quote @${issue.user.name}.
+Your quote has been added to the quotes DB.
+
+You can view the quote by opening: https://quotes.learnaws.io/${dbRes.quoteId}`,
+    });
+
+    const closeIssue = client.issues.update({
       ...issueParams,
       state: "closed",
     });
+
+    await Promise.all([
+      acceptedLabel,
+      successComment,
+      removeNewQuoteLabel,
+      closeIssue,
+    ]);
   } catch (err) {
     if (err instanceof Error) {
       await addLabels(client, issue.number, ["invalid"]);
