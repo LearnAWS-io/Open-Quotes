@@ -58,7 +58,7 @@ const run = async () => {
 
     const successComment = client.issues.createComment({
       ...issueParams,
-      body: `Thank you for your quote @${issue.user.name}.
+      body: `Thank you for your quote @${issue.user.id}.
 Your quote has been added to the quotes DB.
 
 You can view the quote by opening: https://quotes.learnaws.io/${dbRes.quoteId}`,
