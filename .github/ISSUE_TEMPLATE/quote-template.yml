@@ -1,5 +1,5 @@
 name: Submit a new quote
-description: Sumbit your thought-provoking quote
+description: Submit your thought-provoking quote
 title: "[Quote]: "
 labels: ["new-quote"]
 body:
